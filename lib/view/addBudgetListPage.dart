@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'package:finance_tracking/view/addDetail.dart';
+import 'package:finance_tracking/view/viewDetail.dart';
 
 class AddBudgetPage extends StatelessWidget {
   const AddBudgetPage({super.key});
@@ -33,36 +37,39 @@ class AddBudgetPage extends StatelessWidget {
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 15, bottom: 15),
-                      width: 350,
-                      height: 60,
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 1)
-                      ),
-                      child: Row(
-                          children: <Widget>[
-                            Container(
-                              width: 10,
-                              height: double.infinity,
-                              color: Colors.green,
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(left: 10, right: 10),
-                              width: 295,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Title'),
-                                  Text('+5000')
-                                ]
+                    InkWell(
+                      onTap: () => Get.to(ViewDetail()),
+                      child: Container(
+                        margin: EdgeInsets.only(top: 15, bottom: 15),
+                        width: 350,
+                        height: 60,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1)
+                        ),
+                        child: Row(
+                            children: <Widget>[
+                              Container(
+                                width: 10,
+                                height: double.infinity,
+                                color: Colors.green,
                               ),
-                            ),
-                            IconButton(
-                              onPressed: (){},
-                              icon: Icon(Icons.delete)
-                            )
-                          ]
+                              Container(
+                                padding: EdgeInsets.only(left: 10, right: 10),
+                                width: 250,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Title'),
+                                    Text('+5000')
+                                  ]
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: (){},
+                                icon: Icon(Icons.delete)
+                              )
+                            ]
+                        ),
                       ),
                     )
                   ]
@@ -73,9 +80,9 @@ class AddBudgetPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
         onPressed: (){
-
+          Get.to(const AddDetail());
         },
         backgroundColor: Colors.blueAccent,
       )

@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
             ]
         ),
         bottomNavigationBar: TabBar(
+
             tabs: [
               Tab( child: Icon(Icons.monetization_on_outlined, size: 40)),
               Tab(child: Icon(Icons.person, size: 40)),
