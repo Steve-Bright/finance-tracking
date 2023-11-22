@@ -82,7 +82,7 @@ class AddBudgetPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: (){
-          Get.to(const AddDetail());
+          Get.to(AddDetail());
         },
         backgroundColor: Colors.blueAccent,
       )

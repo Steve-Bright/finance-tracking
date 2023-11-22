@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:finance_tracking/view/reusableWidgets/reusableWidgets.dart';
 import 'package:finance_tracking/view/homepage.dart';
+import 'package:finance_tracking/controller/signInController.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
   @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  final SignInController signIn = SignInController();
+
+  @override
+  void dispose() {
+    signIn.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-
-    final _emailController = TextEditingController();
-    final _passwordController = TextEditingController();
 
     return Scaffold(
       body: SafeArea(
@@ -51,11 +62,11 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox( height: 20),
-                reusableTextField("Enter Email", Icons.person_outline, false, _emailController),
+                reusableTextField("Enter Email", Icons.person_outline, false, signIn.getEmail()),
                 const SizedBox( height: 20),
                 PasswordTextFormField(
                   labelText: 'Enter the Password',
-                  passwordEditingController: _passwordController,
+                  passwordEditingController: signIn.getPassword(),
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
                       return 'Enter password.';
@@ -70,7 +81,7 @@ class SignInPage extends StatelessWidget {
                     height: 50,
                     child: TextButton(
                       onPressed: (){
-                        Get.off(const HomePage());
+                        signIn.signIn();
                       },
                       style: const ButtonStyle(
                         padding: MaterialStatePropertyAll(EdgeInsets.only(left: 30, right: 30)),

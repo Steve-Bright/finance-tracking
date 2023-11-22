@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-import 'package:finance_tracking/view/authPage/signin.dart';
+import 'package:finance_tracking/view/mainPage.dart';
+import 'package:finance_tracking/firebase_options.dart';
 
 //Testing
 import 'package:finance_tracking/view/homepage.dart';
 //Testing end
 
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const FinanceTracker());
 }
 
@@ -25,7 +32,7 @@ class FinanceTracker extends StatelessWidget {
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: MainPage(),
     );
   }
 }

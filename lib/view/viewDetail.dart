@@ -34,7 +34,7 @@ class ViewDetail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //Enter the title
-                    reusableBudgetTextField('Title', 200, 40, 1),
+                    reusableBudgetTextField(null, 'Title', 200, 40, 1),
 
                     // choose add or remove the budget
                     Container(
@@ -64,16 +64,16 @@ class ViewDetail extends StatelessWidget {
                     CheckBox(checkboxText: 'Plan for the future'),
 
                     //Budget Amount
-                    reusableBudgetTextField('Budget Amount', 200, 40, 1),
+                    reusableBudgetTextField(null, 'Budget Amount', 200, 40, 1),
 
                     // Reason for adding this budget list
-                    reusableBudgetTextField('Reason (Please Describe Detail)', 300, 120, 3),
+                    reusableBudgetTextField(null,'Reason (Please Describe Detail)', 300, 120, 3),
 
                     //Add the date
-                    reusableBudgetTextField('Date', 200, 40, 1),
+                    reusableBudgetTextField(null,'Date', 200, 40, 1),
 
                     //notes
-                    reusableBudgetTextField('Notes', 200, 120, 2),
+                    reusableBudgetTextField(null, 'Notes', 200, 120, 2),
                   ]
               ),
             ),

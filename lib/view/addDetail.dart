@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:finance_tracking/controller/firestore.dart';
 import 'package:finance_tracking/view/reusableWidgets/textfield.dart';
 import 'package:finance_tracking/view/reusableWidgets/checkbox.dart';
 
 class AddDetail extends StatelessWidget {
-  const AddDetail({super.key});
+  AddDetail({super.key});
+
+  final FireStoreServices fireStore = FireStoreServices();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class AddDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //Enter the title
-                reusableBudgetTextField('Title', 200, 40, 1),
+                reusableBudgetTextField(fireStore.getTitleController(),'Title', 200, 40, 1),
 
                 // choose add or remove the budget
                 Container(
@@ -57,22 +60,25 @@ class AddDetail extends StatelessWidget {
                 CheckBox(checkboxText: 'Plan for the future'),
 
                 //Budget Amount
-                reusableBudgetTextField('Budget Amount', 200, 40, 1),
+                reusableBudgetTextField(fireStore.getBudgetController(), 'Budget', 200, 40, 1),
 
                 // Reason for adding this budget list
-                reusableBudgetTextField('Reason (Please Describe Detail)', 300, 120, 3),
+                reusableBudgetTextField(fireStore.getReasonController(),'Reason (Please Describe Detail)', 300, 120, 3),
 
                 //Add the date
-                reusableBudgetTextField('Date', 200, 40, 1),
+                reusableBudgetTextField(fireStore.getDateController(),'Date', 200, 40, 1),
 
                 //notes
-                reusableBudgetTextField('Notes', 200, 120, 2),
+                reusableBudgetTextField(fireStore.getNotesController(),'Notes', 200, 120, 2),
 
                 Center(
                   child: Container(
                     width: 350,
                     child: TextButton(
                       onPressed: (){
+                        fireStore.addBudgetList();
+                        fireStore.clearAllControllers();
+                        Get.back();
                       },
                       style: const ButtonStyle(
                         padding: MaterialStatePropertyAll(EdgeInsets.only(top: 20, bottom: 20)),
