@@ -1,56 +1,45 @@
-import 'package:flutter/material.dart';
+import 'package:finance_tracking/model/budgetDetail.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FireStoreServices{
-
-  final _titleController = TextEditingController();
-  final _budgetStatusController = TextEditingController();
-  final _planFutureController = TextEditingController();
-  final _budgetController = TextEditingController();
-  final _reasonController = TextEditingController();
-  final _dateController = TextEditingController();
-  final _notesController = TextEditingController();
-  //get collection of notes
-  final CollectionReference notes = FirebaseFirestore.instance.collection('notes');
-
+  final CollectionReference budgetLists = FirebaseFirestore.instance.collection('Budget Lists');
   //Create - add new budget
-  Future<void> addBudgetList(
-      // TextEditingController titleController,
-      // TextEditingController budgetStatusController,
-      // TextEditingController planFutureController,
-      // TextEditingController budgetController,
-      // TextEditingController reasonController,
-      // TextEditingController dateController,
-      // TextEditingController notesController,
-      ){
-    return notes.add({
-
-      'title': _titleController.text,
-      // 'budgetStatus': _budgetStatusController.value,
-      // 'planForFuture': _planFutureController.value,
-      'budget': _budgetController.text,
-      'reason': _reasonController.text,
-      'date': _dateController.text,
-      'notes': _notesController.text,
+  Future<void> addBudgetList(BudgetDetail budgetDetail){
+    return budgetLists.add({
+      'title': budgetDetail.getTitleController().text,
+      'budgetStatus': budgetDetail.getBudgetStatus(),
+      'Plan For Future': budgetDetail.getPlanFuture(),
+      'budget': budgetDetail.getBudgetController().text,
+      'reason': budgetDetail.getReasonController().text,
+      'date': budgetDetail.getDateController().text,
+      'notes': budgetDetail.getNotesController().text,
       'timestamp': Timestamp.now(),
-    });
+
+    }
+    );
+    // return notes.add({
+    //   'title': _titleController.text,
+    //   'budget': _budgetController.text,
+    //   'reason': _reasonController.text,
+    //   'date': _dateController.text,
+    //   'notes': _notesController.text,
+    //   'timestamp': Timestamp.now(),
+    // });
   }
 
-  void clearAllControllers(){
-    _titleController.clear();
-    _budgetStatusController.clear();
-    _planFutureController.clear();
-    _budgetController.clear();
-    _reasonController.clear();
-    _dateController.clear();
-    _notesController.clear();
+  void clearAllControllers(BudgetDetail budgetDetail){
+    budgetDetail.getTitleController().clear();
+    budgetDetail.getBudgetController().clear();
+    budgetDetail.getReasonController().clear();
+    budgetDetail.getDateController().clear();
+    budgetDetail.getNotesController().clear();
   }
 
-  TextEditingController getTitleController(){return _titleController;}
-  TextEditingController getBudgetStatusController(){return _budgetStatusController;}
-  TextEditingController getPlanFutureController(){return _planFutureController;}
-  TextEditingController getBudgetController(){return _budgetController;}
-  TextEditingController getReasonController(){return _reasonController;}
-  TextEditingController getDateController(){return _dateController;}
-  TextEditingController getNotesController(){return _notesController;}
+  // TextEditingController getTitleController(){return _titleController;}
+  // bool getBudgetStatus(){return _budgetStatus;}
+  // bool getPlanFuture(){return _planFuture;}
+  // TextEditingController getBudgetController(){return _budgetController;}
+  // TextEditingController getReasonController(){return _reasonController;}
+  // TextEditingController getDateController(){return _dateController;}
+  // TextEditingController getNotesController(){return _notesController;}
 }

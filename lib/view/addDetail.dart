@@ -2,13 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:finance_tracking/controller/firestore.dart';
+import 'package:finance_tracking/controller/budgetStatusController.dart';
 import 'package:finance_tracking/view/reusableWidgets/textfield.dart';
 import 'package:finance_tracking/view/reusableWidgets/checkbox.dart';
+import 'package:finance_tracking/model/budgetDetail.dart';
 
-class AddDetail extends StatelessWidget {
+class AddDetail extends StatefulWidget {
   AddDetail({super.key});
 
+  @override
+  State<AddDetail> createState() => _AddDetailState();
+}
+
+class _AddDetailState extends State<AddDetail> {
   final FireStoreServices fireStore = FireStoreServices();
+
+  final BudgetDetail budgetDetail = BudgetDetail();
+
+  final BudgetStatus budgetStatus = BudgetStatus();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +41,7 @@ class AddDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //Enter the title
-                reusableBudgetTextField(fireStore.getTitleController(),'Title', 200, 40, 1),
+                reusableBudgetTextField(budgetDetail.getTitleController(),'Title', 200, 40, 1),
 
                 // choose add or remove the budget
                 Container(
@@ -38,46 +49,61 @@ class AddDetail extends StatelessWidget {
                   child: Row(
                     children: [
                       InkWell(
-                        onTap: (){},
                         child: Container(
-                          color: Colors.greenAccent,
-                          padding: EdgeInsets.symmetric(horizontal: 60, vertical: 8),
-                          child: Icon(Icons.add)
+                            color: budgetDetail.getBudgetStatus() ? Colors.greenAccent : null,
+                            padding: EdgeInsets.symmetric(horizontal: 60, vertical: 8),
+                            child: Icon(Icons.add)
                         ),
+                        onTap: (){
+                          setState(() {
+                            if(budgetDetail.getBudgetStatus() == false){
+                              bool status = budgetStatus.changeBudgetStatus(budgetDetail.getBudgetStatus());
+                              budgetDetail.setBudgetStatus(status);
+                            }
+                          });
+                        },
                       ),
                       InkWell(
-                        onTap: (){},
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 60, vertical: 8),
+                            color: budgetDetail.getBudgetStatus() ? null : Colors.greenAccent,
+                            padding: EdgeInsets.symmetric(horizontal: 60, vertical: 8),
                             child: Icon(Icons.remove)
                         ),
+                        onTap: (){
+                          setState(() {
+                            if(budgetDetail.getBudgetStatus() == true){
+                              bool status = budgetStatus.changeBudgetStatus(budgetDetail.getBudgetStatus());
+                              budgetDetail.setBudgetStatus(status);
+                            }
+                          });
+                        },
                       )
                     ]
                   ),
                 ),
 
                 // If the budget is for future
-                CheckBox(checkboxText: 'Plan for the future'),
+                CheckBox(status: budgetDetail.getPlanFuture(), checkboxText: 'Plan for the future'),
 
                 //Budget Amount
-                reusableBudgetTextField(fireStore.getBudgetController(), 'Budget', 200, 40, 1),
+                reusableBudgetTextField(budgetDetail.getBudgetController(), 'Budget', 200, 40, 1),
 
                 // Reason for adding this budget list
-                reusableBudgetTextField(fireStore.getReasonController(),'Reason (Please Describe Detail)', 300, 120, 3),
+                reusableBudgetTextField(budgetDetail.getReasonController(),'Reason (Please Describe Detail)', 300, 120, 3),
 
                 //Add the date
-                reusableBudgetTextField(fireStore.getDateController(),'Date', 200, 40, 1),
+                reusableBudgetTextField(budgetDetail.getDateController(),'Date', 200, 40, 1),
 
                 //notes
-                reusableBudgetTextField(fireStore.getNotesController(),'Notes', 200, 120, 2),
+                reusableBudgetTextField(budgetDetail.getNotesController(),'Notes', 200, 120, 2),
 
                 Center(
                   child: Container(
                     width: 350,
                     child: TextButton(
                       onPressed: (){
-                        fireStore.addBudgetList();
-                        fireStore.clearAllControllers();
+                        fireStore.addBudgetList(budgetDetail);
+                        fireStore.clearAllControllers(budgetDetail);
                         Get.back();
                       },
                       style: const ButtonStyle(

@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:finance_tracking/view/reusableWidgets/textfield.dart';
 import 'package:finance_tracking/view/reusableWidgets/checkbox.dart';
 import 'package:finance_tracking/view/editDetail.dart';
+import 'package:finance_tracking/model/budgetDetail.dart';
 
 class ViewDetail extends StatelessWidget {
-  const ViewDetail({super.key});
+  ViewDetail({super.key});
 
+  final BudgetDetail budgetDetail = BudgetDetail();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +63,7 @@ class ViewDetail extends StatelessWidget {
                     ),
 
                     // If the budget is for future
-                    CheckBox(checkboxText: 'Plan for the future'),
+                    CheckBox(status: budgetDetail.getPlanFuture(), checkboxText: 'Plan for the future'),
 
                     //Budget Amount
                     reusableBudgetTextField(null, 'Budget Amount', 200, 40, 1),

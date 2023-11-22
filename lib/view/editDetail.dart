@@ -4,9 +4,12 @@ import 'package:get/get.dart';
 import 'package:finance_tracking/view/reusableWidgets/textfield.dart';
 import 'package:finance_tracking/view/reusableWidgets/checkbox.dart';
 import 'package:finance_tracking/controller/firestore.dart';
+import 'package:finance_tracking/model/budgetDetail.dart';
 
 class EditDetail extends StatelessWidget {
   EditDetail({super.key});
+
+  final BudgetDetail budgetDetail = BudgetDetail();
 
   final FireStoreServices fireStore = FireStoreServices();
   @override
@@ -29,7 +32,7 @@ class EditDetail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //Enter the title
-                    reusableBudgetTextField(fireStore.getTitleController(),'Title', 200, 40, 1),
+                    reusableBudgetTextField(budgetDetail.getTitleController(),'Title', 200, 40, 1),
 
                     // choose add or remove the budget
                     Container(
@@ -56,50 +59,37 @@ class EditDetail extends StatelessWidget {
                     ),
 
                     // If the budget is for future
-                    CheckBox(checkboxText: 'Plan for the future'),
+                    CheckBox(status: budgetDetail.getPlanFuture(), checkboxText: 'Plan for the future'),
 
                     //Budget Amount
-                    reusableBudgetTextField(fireStore.getBudgetController(),'Budget Amount', 200, 40, 1),
+                    reusableBudgetTextField(budgetDetail.getBudgetController(), 'Budget', 200, 40, 1),
 
                     // Reason for adding this budget list
-                    reusableBudgetTextField(fireStore.getReasonController(),'Reason (Please Describe Detail)', 300, 120, 3),
+                    reusableBudgetTextField(budgetDetail.getReasonController(),'Reason (Please Describe Detail)', 300, 120, 3),
 
                     //Add the date
-                    reusableBudgetTextField(fireStore.getDateController(),'Date', 200, 40, 1),
+                    reusableBudgetTextField(budgetDetail.getDateController(),'Date', 200, 40, 1),
 
                     //notes
-                    reusableBudgetTextField(fireStore.getNotesController(),'Notes', 200, 120, 2),
+                    reusableBudgetTextField(budgetDetail.getNotesController(),'Notes', 200, 120, 2),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          width: 160,
-                          child: TextButton(
-                            onPressed: (){
-                            },
-                            style: const ButtonStyle(
-                              padding: MaterialStatePropertyAll(EdgeInsets.only(top: 5, bottom: 5)),
-                              backgroundColor: MaterialStatePropertyAll(Colors.purpleAccent),
-                              elevation: MaterialStatePropertyAll(40),
-                            ),
-                            child: const Text('Cancel', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                    Center(
+                      child: Container(
+                        width: 350,
+                        child: TextButton(
+                          onPressed: (){
+                            fireStore.addBudgetList(budgetDetail);
+                            fireStore.clearAllControllers(budgetDetail);
+                            Get.back();
+                          },
+                          style: const ButtonStyle(
+                            padding: MaterialStatePropertyAll(EdgeInsets.only(top: 20, bottom: 20)),
+                            backgroundColor: MaterialStatePropertyAll(Colors.purpleAccent),
+                            elevation: MaterialStatePropertyAll(40),
                           ),
+                          child: const Text('Confirm', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                         ),
-                        Container(
-                          width: 160,
-                          child: TextButton(
-                            onPressed: (){
-                            },
-                            style: const ButtonStyle(
-                              padding: MaterialStatePropertyAll(EdgeInsets.only(top: 5, bottom: 5)),
-                              backgroundColor: MaterialStatePropertyAll(Colors.purpleAccent),
-                              elevation: MaterialStatePropertyAll(40),
-                            ),
-                            child: const Text('Confirm', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ]
               ),
