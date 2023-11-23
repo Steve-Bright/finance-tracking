@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:finance_tracking/controller/firestore.dart';
 import 'package:finance_tracking/controller/budgetStatusController.dart';
 import 'package:finance_tracking/view/reusableWidgets/textfield.dart';
-import 'package:finance_tracking/view/reusableWidgets/checkbox.dart';
 import 'package:finance_tracking/model/budgetDetail.dart';
 
 class AddDetail extends StatefulWidget {
@@ -82,11 +81,8 @@ class _AddDetailState extends State<AddDetail> {
                   ),
                 ),
 
-                // If the budget is for future
-                CheckBox(status: budgetDetail.getPlanFuture(), checkboxText: 'Plan for the future'),
-
                 //Budget Amount
-                reusableBudgetTextField(budgetDetail.getBudgetController(), 'Budget', 200, 40, 1),
+                reusableBudgetTextField(budgetDetail.getBudgetController(), 'Budget', 200, 40, 1, numberType: true),
 
                 // Reason for adding this budget list
                 reusableBudgetTextField(budgetDetail.getReasonController(),'Reason (Please Describe Detail)', 300, 120, 3),
