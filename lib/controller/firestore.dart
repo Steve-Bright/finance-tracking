@@ -17,14 +17,19 @@ class FireStoreServices{
 
     }
     );
-    // return notes.add({
-    //   'title': _titleController.text,
-    //   'budget': _budgetController.text,
-    //   'reason': _reasonController.text,
-    //   'date': _dateController.text,
-    //   'notes': _notesController.text,
-    //   'timestamp': Timestamp.now(),
-    // });
+  }
+
+  Stream<QuerySnapshot> getNotesStream(){
+    final budgetListsStream = budgetLists.orderBy('timestamp', descending: true).snapshots();
+
+    return budgetListsStream;
+  }
+
+  Future<void> updateNote(String docID, String newTitle){
+    return budgetLists.doc(docID).update({
+      'title': newTitle,
+      'timestamp': Timestamp.now()
+    });
   }
 
   void clearAllControllers(BudgetDetail budgetDetail){
@@ -35,11 +40,4 @@ class FireStoreServices{
     budgetDetail.getNotesController().clear();
   }
 
-  // TextEditingController getTitleController(){return _titleController;}
-  // bool getBudgetStatus(){return _budgetStatus;}
-  // bool getPlanFuture(){return _planFuture;}
-  // TextEditingController getBudgetController(){return _budgetController;}
-  // TextEditingController getReasonController(){return _reasonController;}
-  // TextEditingController getDateController(){return _dateController;}
-  // TextEditingController getNotesController(){return _notesController;}
 }
