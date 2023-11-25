@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:finance_tracking/model/budgetDetail.dart';
-import 'package:finance_tracking/model/viewDetail.dart';
+import 'package:finance_tracking/model/budgetDetailModel.dart';
 import 'package:finance_tracking/model/editModel.dart';
-import 'package:finance_tracking/controller/calculationController.dart';
 
 abstract class BudgetControllerHolder {
   void clearControllers();
@@ -13,9 +11,8 @@ class FireStoreServices{
 
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final CollectionReference budgetLists = FirebaseFirestore.instance.collection('Budget Lists');
-  // final CalculationController calculationControl = CalculationController();
   //Create - add new budget
-  Future<void> addBudgetList(BudgetDetail budgetDetail){
+  Future<void> addBudgetList(BudgetDetailModel budgetDetail){
     // if (budgetDetail.getBudgetStatus() == false){
     //   calculationControl.calculateExpenseUsed(budgetDetail);
     // }
@@ -56,14 +53,14 @@ class FireStoreServices{
     }
   }
 
-  Future<void> updateNote(String docID, EditBudgetDetail viewDetail){
+  Future<void> updateNote(String docID, EditBudgetDetail editDetail){
     return budgetLists.doc(docID).update({
-      'title': viewDetail.getTitleController().text,
-      'budgetStatus': viewDetail.getBudgetStatus(),
-      'budget': viewDetail.getBudgetController().text,
-      'reason': viewDetail.getReasonController().text,
-      'date': viewDetail.getDateController().text,
-      'notes': viewDetail.getNotesController().text,
+      'title': editDetail.getTitleController().text,
+      'budgetStatus': editDetail.getBudgetStatus(),
+      'budget': editDetail.getBudgetController().text,
+      'reason': editDetail.getReasonController().text,
+      'date': editDetail.getDateController().text,
+      'notes': editDetail.getNotesController().text,
       'timestamp': Timestamp.now(),
     });
   }

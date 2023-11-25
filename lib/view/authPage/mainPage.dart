@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:finance_tracking/view/homepage.dart';
+import 'package:finance_tracking/view/homePage/homepage.dart';
 import 'package:finance_tracking/view/authPage/signIn.dart';
 
 class MainPage extends StatelessWidget {

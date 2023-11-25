@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:finance_tracking/controller/firestore.dart';
 
-class ViewBudgetDetail implements BudgetControllerHolder{
+class ViewBudgetDetail{
   String title;
   bool budgetStatus;
   String budgetAmount;
@@ -42,12 +42,4 @@ class ViewBudgetDetail implements BudgetControllerHolder{
     return controller;
   }
 
-  @override
-  void clearControllers() {
-    getTitleController().clear();
-    getBudgetController().clear();
-    getReasonController().clear();
-    getDateController().clear();
-    getNotesController().clear();
-  }
 }

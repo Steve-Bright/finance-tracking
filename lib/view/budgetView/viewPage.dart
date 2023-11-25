@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 
 import 'package:finance_tracking/controller/fireStore.dart';
 import 'package:finance_tracking/view/reusableWidgets/textfield.dart';
-import 'package:finance_tracking/view/editDetail.dart';
-import 'package:finance_tracking/model/budgetDetail.dart';
+import 'package:finance_tracking/view/budgetView/editPage.dart';
+import 'package:finance_tracking/model/budgetDetailModel.dart';
 import 'package:finance_tracking/model/viewDetail.dart';
 
-class ViewDetail extends StatelessWidget {
+class ViewPage extends StatelessWidget {
   String documentID;
-  ViewDetail({super.key, required this.documentID});
-  final BudgetDetail budgetDetail = BudgetDetail();
+  ViewPage({super.key, required this.documentID});
+  final BudgetDetailModel budgetDetail = BudgetDetailModel();
   FireStoreServices fireStore = FireStoreServices();
 
   @override
@@ -52,7 +52,7 @@ class ViewDetail extends StatelessWidget {
                   actions: [
                     IconButton(
                         icon: Icon(Icons.edit),
-                        onPressed: ()=> Get.to(EditDetail(documentID: documentID, viewDetail: viewDetail,))
+                        onPressed: ()=> Get.to(EditPage(documentID: documentID, viewDetail: viewDetail,))
                     )
                   ]
               ),

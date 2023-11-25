@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:finance_tracking/view/addBudgetListPage.dart';
+import 'package:finance_tracking/view/budgetView/budgetPage.dart';
 import 'package:finance_tracking/view/profileDetail.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         body: TabBarView(
             children: [
-              AddBudgetPage(),
+              BudgetPage(),
               ProfileDetail()
             ]
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:finance_tracking/view/viewDetail.dart';
+import 'package:finance_tracking/view/budgetView/viewPage.dart';
 import 'package:finance_tracking/controller/firestore.dart';
 
 class BudgetListDesign extends StatelessWidget {
@@ -34,7 +34,7 @@ class BudgetListDesign extends StatelessWidget {
       child: Column(
           children: [
             InkWell(
-              onTap: () => Get.to(ViewDetail(documentID: documentID)),
+              onTap: () => Get.to(ViewPage(documentID: documentID)),
               child: Container(
                 margin: EdgeInsets.only(top: 15, bottom: 15),
                 width: 350,

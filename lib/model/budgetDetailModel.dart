@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_tracking/controller/firestore.dart';
 
-class BudgetDetail implements BudgetControllerHolder{
+class BudgetDetailModel implements BudgetControllerHolder{
   TextEditingController _title = TextEditingController();
   RxBool _budgetStatus = RxBool(true);
   TextEditingController _budgetAmount = TextEditingController();

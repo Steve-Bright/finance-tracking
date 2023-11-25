@@ -4,27 +4,28 @@ import 'package:get/get.dart';
 import 'package:finance_tracking/controller/firestore.dart';
 import 'package:finance_tracking/controller/budgetStatusController.dart';
 import 'package:finance_tracking/view/reusableWidgets/textfield.dart';
-import 'package:finance_tracking/model/budgetDetail.dart';
+import 'package:finance_tracking/model/budgetDetailModel.dart';
 
-class AddDetail extends StatefulWidget {
-  AddDetail({super.key});
+class AddPage extends StatefulWidget {
+  AddPage({super.key});
 
   @override
-  State<AddDetail> createState() => _AddDetailState();
+  State<AddPage> createState() => _AddPageState();
 }
 
-class _AddDetailState extends State<AddDetail> {
+class _AddPageState extends State<AddPage> {
   final FireStoreServices fireStore = FireStoreServices();
 
-  final BudgetDetail budgetDetail = BudgetDetail();
+  final BudgetDetailModel budgetDetail = BudgetDetailModel();
 
-  final BudgetStatus budgetStatus = BudgetStatus();
+  final BudgetStatusController budgetStatus = BudgetStatusController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
+          key: Key('backButton'),
           icon: Icon(Icons.arrow_back_ios_new),
           onPressed: (){
             Get.back();

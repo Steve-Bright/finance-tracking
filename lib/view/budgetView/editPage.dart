@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:finance_tracking/view/homepage.dart';
+import 'package:finance_tracking/view/homePage/homepage.dart';
 import 'package:finance_tracking/view/reusableWidgets/textfield.dart';
 import 'package:finance_tracking/controller/firestore.dart';
 import 'package:finance_tracking/controller/budgetStatusController.dart';
-import 'package:finance_tracking/model/budgetDetail.dart';
 import 'package:finance_tracking/model/viewDetail.dart';
 import 'package:finance_tracking/model/editModel.dart';
 
 
-class EditDetail extends StatefulWidget {
+class EditPage extends StatefulWidget {
   String documentID;
   ViewBudgetDetail viewDetail;
-  EditDetail({super.key, required this.documentID, required this.viewDetail});
+  EditPage({super.key, required this.documentID, required this.viewDetail});
 
   @override
-  State<EditDetail> createState() => _EditDetailState();
+  State<EditPage> createState() => _EditPageState();
 }
 
-class _EditDetailState extends State<EditDetail> {
+class _EditPageState extends State<EditPage> {
   FireStoreServices fireStore = FireStoreServices();
-  final BudgetStatus budgetStatus = BudgetStatus();
+  final BudgetStatusController budgetStatus = BudgetStatusController();
   late EditBudgetDetail editBudget;
 
   @override

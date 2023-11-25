@@ -1,4 +1,4 @@
-class BudgetStatus{
+class BudgetStatusController{
 
   bool changeBudgetStatus(bool budgetStatus){
     budgetStatus = !budgetStatus;

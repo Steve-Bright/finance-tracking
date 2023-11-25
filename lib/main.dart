@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'package:finance_tracking/view/mainPage.dart';
+import 'package:finance_tracking/view/authPage/mainPage.dart';
 import 'package:finance_tracking/firebase_options.dart';
 
 //Testing
-import 'package:finance_tracking/view/homepage.dart';
+import 'package:finance_tracking/view/homePage/homepage.dart';
 //Testing end
 
 

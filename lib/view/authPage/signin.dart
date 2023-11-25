@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:finance_tracking/view/reusableWidgets/reusableWidgets.dart';
-import 'package:finance_tracking/view/homepage.dart';
+import 'package:finance_tracking/view/homePage/homepage.dart';
 import 'package:finance_tracking/controller/signInController.dart';
 
 class SignInPage extends StatefulWidget {
@@ -50,9 +50,12 @@ class _SignInPageState extends State<SignInPage> {
                 Center(
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/profile_pic.jpg'),
-                        radius: 70,
+                      Container(
+                        width: 300,
+                        height: 300,
+                        child: Image(
+                          image: AssetImage('assets/GalaxyRay.png')
+                        ),
                       ),
                       SizedBox( height: 20),
                       Text('Galaxy Ray', style: GoogleFonts.quando(
