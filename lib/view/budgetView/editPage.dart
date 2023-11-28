@@ -38,7 +38,7 @@ class _EditPageState extends State<EditPage> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Return a loading indicator while waiting for the data.
-          return CircularProgressIndicator();
+          return CircularProgressIndicator(value: 0);
         } else if (snapshot.hasError) {
           // Handle errors.
           return Text('Error: ${snapshot.error}');
@@ -90,7 +90,7 @@ class _EditPageState extends State<EditPage> {
                                   ),
                                   InkWell(
                                     child: Container(
-                                        color: editBudget.getBudgetStatus() ? null : Colors.greenAccent,
+                                        color: editBudget.getBudgetStatus() ? null : Colors.redAccent,
                                         padding: EdgeInsets.symmetric(horizontal: 60, vertical: 8),
                                         child: Icon(Icons.remove)
                                     ),
@@ -129,8 +129,8 @@ class _EditPageState extends State<EditPage> {
                                   Get.offAll(const HomePage());
                                 },
                                 style: const ButtonStyle(
-                                  padding: MaterialStatePropertyAll(EdgeInsets.only(top: 20, bottom: 20)),
-                                  backgroundColor: MaterialStatePropertyAll(Colors.purpleAccent),
+                                  padding: MaterialStatePropertyAll(EdgeInsets.only(top: 10, bottom: 10)),
+                                  backgroundColor: MaterialStatePropertyAll(Colors.black),
                                   elevation: MaterialStatePropertyAll(40),
                                 ),
                                 child: const Text('Confirm', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),

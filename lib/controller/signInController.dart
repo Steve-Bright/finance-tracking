@@ -25,3 +25,11 @@ class SignInController{
     return _passwordController;
   }
 }
+
+class SignOutController{
+
+  void signOut(){
+  FirebaseAuth.instance.signOut();
+}
+
+}

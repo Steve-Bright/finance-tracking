@@ -4,11 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:finance_tracking/view/authPage/mainPage.dart';
 import 'package:finance_tracking/firebase_options.dart';
-
-//Testing
-import 'package:finance_tracking/view/homePage/homepage.dart';
-//Testing end
-
+import 'package:dcdg/dcdg.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

@@ -22,7 +22,7 @@ class ViewPage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Return a loading indicator while waiting for the data.
-          return CircularProgressIndicator();
+          return CircularProgressIndicator(value: 0);
         } else if (snapshot.hasError) {
           // Handle errors.
           return Text('Error: ${snapshot.error}');
@@ -82,7 +82,7 @@ class ViewPage extends StatelessWidget {
                                   InkWell(
                                     onTap: (){},
                                     child: Container(
-                                        color:  viewDetail.getBudgetStatus() ? null : Colors.greenAccent,
+                                        color:  viewDetail.getBudgetStatus() ? null : Colors.redAccent,
                                         padding: EdgeInsets.symmetric(horizontal: 60, vertical: 8),
                                         child: Icon(Icons.remove)
                                     ),

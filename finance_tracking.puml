@@ -1,0 +1,236 @@
+@startuml
+set namespaceSeparator ::
+
+class "finance_tracking::controller::budgetStatusController.dart::BudgetStatusController" {
+  +bool changeBudgetStatus()
+}
+
+abstract class "finance_tracking::controller::firestore.dart::BudgetControllerHolder" {
+  +void clearControllers()
+}
+
+class "finance_tracking::controller::firestore.dart::FireStoreServices" {
+  -FirebaseFirestore _fireStore
+  +CollectionReference<Object?> budgetLists
+  +dynamic addBudgetList()
+  +Stream<QuerySnapshot<Object?>> getNotesStream()
+  +dynamic getDocumentData()
+  +dynamic updateNote()
+  +dynamic deleteNote()
+  +void clearAllControllers()
+}
+
+"finance_tracking::controller::firestore.dart::FireStoreServices" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+"finance_tracking::controller::firestore.dart::FireStoreServices" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+
+class "finance_tracking::controller::signInController.dart::SignInController" {
+  -TextEditingController _emailController
+  -TextEditingController _passwordController
+  +dynamic signIn()
+  +void dispose()
+  +TextEditingController getEmail()
+  +TextEditingController getPassword()
+}
+
+"finance_tracking::controller::signInController.dart::SignInController" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+class "finance_tracking::firebase_options.dart::DefaultFirebaseOptions" {
+  {static} +FirebaseOptions web
+  {static} +FirebaseOptions android
+  {static} +FirebaseOptions ios
+  {static} +FirebaseOptions macos
+  {static} +FirebaseOptions currentPlatform
+}
+
+"finance_tracking::firebase_options.dart::DefaultFirebaseOptions" o-- "firebase_core_platform_interface::firebase_core_platform_interface.dart::FirebaseOptions"
+
+class "finance_tracking::main.dart::FinanceTracker" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "finance_tracking::main.dart::FinanceTracker"
+
+class "finance_tracking::model::budgetDetailModel.dart::BudgetDetailModel" {
+  -TextEditingController _title
+  -RxBool _budgetStatus
+  -TextEditingController _budgetAmount
+  -TextEditingController _reason
+  -TextEditingController _date
+  -TextEditingController _notes
+  +TextEditingController getTitleController()
+  +bool getBudgetStatus()
+  +TextEditingController getBudgetController()
+  +TextEditingController getReasonController()
+  +TextEditingController getDateController()
+  +TextEditingController getNotesController()
+  +void setBudgetStatus()
+  +void clearControllers()
+}
+
+"finance_tracking::model::budgetDetailModel.dart::BudgetDetailModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"finance_tracking::model::budgetDetailModel.dart::BudgetDetailModel" o-- "get::get_rx::src::rx_types::rx_types.dart::RxBool"
+"finance_tracking::controller::firestore.dart::BudgetControllerHolder" <|-- "finance_tracking::model::budgetDetailModel.dart::BudgetDetailModel"
+
+class "finance_tracking::model::editModel.dart::EditBudgetDetail" {
+  +ViewBudgetDetail viewDetail
+  -TextEditingController _title
+  -RxBool _budgetStatus
+  -TextEditingController _budgetAmount
+  -TextEditingController _reason
+  -TextEditingController _date
+  -TextEditingController _notes
+  +TextEditingController getTitleController()
+  +bool getBudgetStatus()
+  +TextEditingController getBudgetController()
+  +TextEditingController getReasonController()
+  +TextEditingController getDateController()
+  +TextEditingController getNotesController()
+  +void setBudgetStatus()
+  +void clearControllers()
+}
+
+"finance_tracking::model::editModel.dart::EditBudgetDetail" o-- "finance_tracking::model::viewDetail.dart::ViewBudgetDetail"
+"finance_tracking::model::editModel.dart::EditBudgetDetail" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"finance_tracking::model::editModel.dart::EditBudgetDetail" o-- "get::get_rx::src::rx_types::rx_types.dart::RxBool"
+"finance_tracking::controller::firestore.dart::BudgetControllerHolder" <|-- "finance_tracking::model::editModel.dart::EditBudgetDetail"
+
+class "finance_tracking::model::viewDetail.dart::ViewBudgetDetail" {
+  +String title
+  +bool budgetStatus
+  +String budgetAmount
+  +String reason
+  +String date
+  +String notes
+  +TextEditingController getTitleController()
+  +bool getBudgetStatus()
+  +TextEditingController getBudgetController()
+  +TextEditingController getReasonController()
+  +TextEditingController getDateController()
+  +TextEditingController getNotesController()
+}
+
+class "finance_tracking::view::authPage::mainPage.dart::MainPage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "finance_tracking::view::authPage::mainPage.dart::MainPage"
+
+class "finance_tracking::view::authPage::signin.dart::SignInPage" {
+  +State<SignInPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "finance_tracking::view::authPage::signin.dart::SignInPage"
+
+class "finance_tracking::view::authPage::signin.dart::_SignInPageState" {
+  +SignInController signIn
+  +void dispose()
+  +Widget build()
+}
+
+"finance_tracking::view::authPage::signin.dart::_SignInPageState" o-- "finance_tracking::controller::signInController.dart::SignInController"
+"flutter::src::widgets::framework.dart::State" <|-- "finance_tracking::view::authPage::signin.dart::_SignInPageState"
+
+class "finance_tracking::view::budgetView::addPage.dart::AddPage" {
+  +State<AddPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "finance_tracking::view::budgetView::addPage.dart::AddPage"
+
+class "finance_tracking::view::budgetView::addPage.dart::_AddPageState" {
+  +FireStoreServices fireStore
+  +BudgetDetailModel budgetDetail
+  +BudgetStatusController budgetStatus
+  +Widget build()
+}
+
+"finance_tracking::view::budgetView::addPage.dart::_AddPageState" o-- "finance_tracking::controller::firestore.dart::FireStoreServices"
+"finance_tracking::view::budgetView::addPage.dart::_AddPageState" o-- "finance_tracking::model::budgetDetailModel.dart::BudgetDetailModel"
+"finance_tracking::view::budgetView::addPage.dart::_AddPageState" o-- "finance_tracking::controller::budgetStatusController.dart::BudgetStatusController"
+"flutter::src::widgets::framework.dart::State" <|-- "finance_tracking::view::budgetView::addPage.dart::_AddPageState"
+
+class "finance_tracking::view::budgetView::budgetPage.dart::BudgetPage" {
+  +FireStoreServices fireStore
+  +Widget build()
+}
+
+"finance_tracking::view::budgetView::budgetPage.dart::BudgetPage" o-- "finance_tracking::controller::firestore.dart::FireStoreServices"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "finance_tracking::view::budgetView::budgetPage.dart::BudgetPage"
+
+class "finance_tracking::view::budgetView::editPage.dart::EditPage" {
+  +String documentID
+  +ViewBudgetDetail viewDetail
+  +State<EditPage> createState()
+}
+
+"finance_tracking::view::budgetView::editPage.dart::EditPage" o-- "finance_tracking::model::viewDetail.dart::ViewBudgetDetail"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "finance_tracking::view::budgetView::editPage.dart::EditPage"
+
+class "finance_tracking::view::budgetView::editPage.dart::_EditPageState" {
+  +FireStoreServices fireStore
+  +BudgetStatusController budgetStatus
+  +EditBudgetDetail editBudget
+  +void initState()
+  +Widget build()
+}
+
+"finance_tracking::view::budgetView::editPage.dart::_EditPageState" o-- "finance_tracking::controller::firestore.dart::FireStoreServices"
+"finance_tracking::view::budgetView::editPage.dart::_EditPageState" o-- "finance_tracking::controller::budgetStatusController.dart::BudgetStatusController"
+"finance_tracking::view::budgetView::editPage.dart::_EditPageState" o-- "finance_tracking::model::editModel.dart::EditBudgetDetail"
+"flutter::src::widgets::framework.dart::State" <|-- "finance_tracking::view::budgetView::editPage.dart::_EditPageState"
+
+class "finance_tracking::view::budgetView::viewPage.dart::ViewPage" {
+  +String documentID
+  +BudgetDetailModel budgetDetail
+  +FireStoreServices fireStore
+  +Widget build()
+}
+
+"finance_tracking::view::budgetView::viewPage.dart::ViewPage" o-- "finance_tracking::model::budgetDetailModel.dart::BudgetDetailModel"
+"finance_tracking::view::budgetView::viewPage.dart::ViewPage" o-- "finance_tracking::controller::fireStore.dart::FireStoreServices"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "finance_tracking::view::budgetView::viewPage.dart::ViewPage"
+
+class "finance_tracking::view::homePage::homepage.dart::HomePage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "finance_tracking::view::homePage::homepage.dart::HomePage"
+
+class "finance_tracking::view::profileDetail.dart::ProfileDetail" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "finance_tracking::view::profileDetail.dart::ProfileDetail"
+
+class "finance_tracking::view::reusableWidgets::budgetListDesign.dart::BudgetListDesign" {
+  +String title
+  +bool budgetStatus
+  +String budget
+  +String documentID
+  +FireStoreServices fireStore
+  +Widget build()
+}
+
+"finance_tracking::view::reusableWidgets::budgetListDesign.dart::BudgetListDesign" o-- "finance_tracking::controller::firestore.dart::FireStoreServices"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "finance_tracking::view::reusableWidgets::budgetListDesign.dart::BudgetListDesign"
+
+class "finance_tracking::view::reusableWidgets::reusableWidgets.dart::PasswordTextFormField" {
+  +String? hintText
+  +String labelText
+  +String? Function(String?) validator
+  +TextEditingController passwordEditingController
+  +State<PasswordTextFormField> createState()
+}
+
+"finance_tracking::view::reusableWidgets::reusableWidgets.dart::PasswordTextFormField" o-- "null::String Function(String)"
+"finance_tracking::view::reusableWidgets::reusableWidgets.dart::PasswordTextFormField" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "finance_tracking::view::reusableWidgets::reusableWidgets.dart::PasswordTextFormField"
+
+class "finance_tracking::view::reusableWidgets::reusableWidgets.dart::_PasswordTextFormFieldState" {
+  -bool _isPasswordHide
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "finance_tracking::view::reusableWidgets::reusableWidgets.dart::_PasswordTextFormFieldState"
+
+
+@enduml

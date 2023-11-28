@@ -65,7 +65,7 @@ class _AddPageState extends State<AddPage> {
                       ),
                       InkWell(
                         child: Container(
-                            color: budgetDetail.getBudgetStatus() ? null : Colors.greenAccent,
+                            color: budgetDetail.getBudgetStatus() ? null : Colors.redAccent,
                             padding: EdgeInsets.symmetric(horizontal: 60, vertical: 8),
                             child: Icon(Icons.remove)
                         ),
@@ -104,8 +104,8 @@ class _AddPageState extends State<AddPage> {
                         Get.back();
                       },
                       style: const ButtonStyle(
-                        padding: MaterialStatePropertyAll(EdgeInsets.only(top: 20, bottom: 20)),
-                        backgroundColor: MaterialStatePropertyAll(Colors.purpleAccent),
+                        padding: MaterialStatePropertyAll(EdgeInsets.only(top: 10, bottom: 10)),
+                        backgroundColor: MaterialStatePropertyAll(Colors.black),
                         elevation: MaterialStatePropertyAll(40),
                       ),
                       child: const Text('Confirm', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),

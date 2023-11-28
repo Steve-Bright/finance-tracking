@@ -29,19 +29,7 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.only(top: 100, right: 20, left: 20),
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Colors.blueAccent,
-                Colors.purple
-              ]
-            ),
-            // color: Color(0xFF0c222f),
-            color: Colors.lightBlue,
-          ),
+          padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
           child: ListView(
             children: [
               Column(
@@ -57,15 +45,15 @@ class _SignInPageState extends State<SignInPage> {
                           image: AssetImage('assets/GalaxyRay.png')
                         ),
                       ),
-                      SizedBox( height: 20),
-                      Text('Galaxy Ray', style: GoogleFonts.quando(
-                            textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 40, color: Colors.white),
+                      // SizedBox( height: 10),
+                      Text('Sign In', style: GoogleFonts.quando(
+                            textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 40, color: Colors.black),
                           )),
                     ],
                   ),
                 ),
                 const SizedBox( height: 20),
-                reusableTextField("Enter Email", Icons.person_outline, false, signIn.getEmail()),
+                reusableTextField("Enter Email", Icons.person_outline, signIn.getEmail()),
                 const SizedBox( height: 20),
                 PasswordTextFormField(
                   labelText: 'Enter the Password',
@@ -88,10 +76,10 @@ class _SignInPageState extends State<SignInPage> {
                       },
                       style: const ButtonStyle(
                         padding: MaterialStatePropertyAll(EdgeInsets.only(left: 30, right: 30)),
-                        backgroundColor: MaterialStatePropertyAll(Colors.purpleAccent),
+                        backgroundColor: MaterialStatePropertyAll(Colors.black),
                         elevation: MaterialStatePropertyAll(40),
                       ),
-                      child: const Text('Sign In', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                      child: const Text('Sign In', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
                     ),
                   ),
                 )

@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
 
-TextField reusableTextField(String text, IconData icon, bool isPasswordType,
+TextField reusableTextField(String text, IconData icon,
     TextEditingController? controller) {
   return TextField(
     controller: controller,
-    obscureText: isPasswordType,
-    enableSuggestions: !isPasswordType,
-    autocorrect: !isPasswordType,
-    cursorColor: Colors.white,
-    style: TextStyle(color: Colors.white.withOpacity(0.9)),
+    enableSuggestions: true,
+    autocorrect: true,
+    cursorColor: Colors.black,
+    style: TextStyle(color: Colors.black.withOpacity(0.9)),
     decoration: InputDecoration(
       prefixIcon: Icon(
         icon,
-        color: Colors.white70,
+        color: Colors.black,
       ),
       labelText: text,
-      labelStyle: TextStyle(color: Colors.white.withOpacity(0.9)),
+      labelStyle: TextStyle(color: Colors.black.withOpacity(0.9)),
       filled: true,
       floatingLabelBehavior: FloatingLabelBehavior.never,
       fillColor: Colors.white.withOpacity(0.3),
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),
-          borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
+          borderSide: const BorderSide(width: 1, style: BorderStyle.solid)),
     ),
-    keyboardType: isPasswordType
-        ? TextInputType.visiblePassword
-        : TextInputType.emailAddress,
+    keyboardType: TextInputType.emailAddress,
   );
 }
 
@@ -55,20 +52,20 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
     return TextFormField(
       controller: widget.passwordEditingController,
       obscureText: _isPasswordHide,
-      cursorColor: Colors.white,
-      style: TextStyle(color: Colors.white.withOpacity(0.9)),
+      cursorColor: Colors.black,
+      style: TextStyle(color: Colors.black.withOpacity(0.9)),
       // maxLength: 20,
       decoration: InputDecoration(
         labelText: widget.labelText,
-        labelStyle: TextStyle(color: Colors.white.withOpacity(0.9)),
+        labelStyle: TextStyle(color: Colors.black.withOpacity(0.9)),
         filled: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         fillColor: Colors.white.withOpacity(0.3),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
-            borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
+            borderSide: const BorderSide(width: 1, style: BorderStyle.solid)),
         hintText: widget.hintText,
-        prefixIcon: const Icon(Icons.password, color: Colors.white70),
+        prefixIcon: const Icon(Icons.password, color: Colors.black),
         suffixIcon: IconButton(
           tooltip: 'Visible/Hide password',
           onPressed: () {

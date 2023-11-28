@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:finance_tracking/controller/signInController.dart';
 
 class ProfileDetail extends StatelessWidget {
   const ProfileDetail({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,24 @@ class ProfileDetail extends StatelessWidget {
                           Text('swemhtet.net@gmail.com', style: TextStyle(fontSize: 23))
                         ]
                     )
-                )
+                ),
+
+                Container(
+                  margin: EdgeInsets.only(top: 10, bottom: 10),
+                  width: 350,
+                  child: TextButton(
+                    onPressed: (){
+                      SignOutController signOutController = SignOutController();
+                      signOutController.signOut();
+                    },
+                    style: const ButtonStyle(
+                      padding: MaterialStatePropertyAll(EdgeInsets.only(top: 10, bottom: 10)),
+                      backgroundColor: MaterialStatePropertyAll(Colors.black),
+                      elevation: MaterialStatePropertyAll(40),
+                    ),
+                    child: const Text('Sign Out', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                  ),
+                ),
               ]
             )
           ],

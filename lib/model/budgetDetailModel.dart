@@ -3,6 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:finance_tracking/controller/firestore.dart';
 
 class BudgetDetailModel implements BudgetControllerHolder{
+
+  @override
+  void clearControllers() {
+    getTitleController().clear();
+    getBudgetController().clear();
+    getReasonController().clear();
+    getDateController().clear();
+    getNotesController().clear();
+  }
+
   TextEditingController _title = TextEditingController();
   RxBool _budgetStatus = RxBool(true);
   TextEditingController _budgetAmount = TextEditingController();
@@ -18,15 +28,6 @@ class BudgetDetailModel implements BudgetControllerHolder{
   TextEditingController getNotesController(){return _notes;}
 
   void setBudgetStatus(bool status) => _budgetStatus = RxBool(status);
-
-  @override
-  void clearControllers() {
-    getTitleController().clear();
-    getBudgetController().clear();
-    getReasonController().clear();
-    getDateController().clear();
-    getNotesController().clear();
-  }
 }
 
 

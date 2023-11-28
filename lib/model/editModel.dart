@@ -5,6 +5,15 @@ import 'package:finance_tracking/model/viewDetail.dart';
 import 'package:finance_tracking/controller/firestore.dart';
 
 class EditBudgetDetail implements BudgetControllerHolder{
+  @override
+  void clearControllers() {
+    getTitleController().clear();
+    getBudgetController().clear();
+    getReasonController().clear();
+    getDateController().clear();
+    getNotesController().clear();
+  }
+
   ViewBudgetDetail viewDetail;
 
   TextEditingController _title = TextEditingController();
@@ -32,13 +41,5 @@ class EditBudgetDetail implements BudgetControllerHolder{
 
   void setBudgetStatus(bool status) => _budgetStatus = RxBool(status);
 
-  @override
-  void clearControllers() {
-    getTitleController().clear();
-    getBudgetController().clear();
-    getReasonController().clear();
-    getDateController().clear();
-    getNotesController().clear();
-  }
 
 }
